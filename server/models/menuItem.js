@@ -4,10 +4,7 @@ module.exports = (sequelize, type) =>
     return sequelize.define
     ('MenuItem', 
         {
-            id:
-            {
-                type: type.INTEGER
-            },
+           
             category: 
             {
                 type: type.STRING,
@@ -33,17 +30,18 @@ module.exports = (sequelize, type) =>
             },
             spicy: 
             {
-                type: Sequelize.BOOLEAN,
+                type: type.BOOLEAN,
                 allowNull: true,
                 default: null
             },
             vegetarian: 
             {
-                type: Sequelize.BOOLEAN,
+                type: type.BOOLEAN,
                 allowNull: true,
                 default: null
             },
             
-        }
+        }, 
+        {timestamps: false}
     ) 
 }

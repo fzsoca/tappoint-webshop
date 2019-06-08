@@ -4,7 +4,7 @@ const UserModel = require('./user')
 const OrderModel = require('./order')
 const MenuItemModel = require('./menuItem')
 
-const db = {}
+var db = {}
 
 //TODO get parameters from config file or .env variable
 const sequelize = new Sequelize('tappoint', 'tappoint-db-user', 'm3m3nt0_m0r1', {
@@ -12,18 +12,20 @@ const sequelize = new Sequelize('tappoint', 'tappoint-db-user', 'm3m3nt0_m0r1', 
     dialect: 'mysql'
 })
 
-const User = UserModel(sequelize, Sequelize)
-const MenuItem = MenuItemModel(sequelize, Sequelize)
-const Order = Order(sequelize, Sequelize)
+var User = UserModel(sequelize, Sequelize)
+var MenuItem = MenuItemModel(sequelize, Sequelize)
+var Order = OrderModel(sequelize, Sequelize)
 
-const OrderMenuItem = sequelize.define('OrderMenuItem', {})
 //TODO what is unique
-MenuItem.belongsToMany(Order, {through: OrderMenuItem, unique: false})
-Order.belongsToMany(MenuItem, {through: OrderMenuItem, unique: false})
+MenuItem.belongsToMany(Order, {through: 'OrderMenuItem'})
+Order.belongsToMany(MenuItem, {through: 'OrderMenuItem'})
 Order.belongsTo(User)
 
 db.User = User
 db.MenuItem = MenuItem
 db.Order = Order
+
+db.sequelize = sequelize
+db.Sequelize = Sequelize
 
 module.exports = db
