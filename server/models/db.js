@@ -16,9 +16,21 @@ var User = UserModel(sequelize, Sequelize)
 var MenuItem = MenuItemModel(sequelize, Sequelize)
 var Order = OrderModel(sequelize, Sequelize)
 
+var OrderMenuItem = sequelize.define('OrderMenuItem', 
+{
+    menuItemId:
+    {
+        type: Sequelize.INTEGER(11)
+    },
+    orderId: 
+    {
+        type: Sequelize.INTEGER
+    }
+})
+
 //TODO what is unique
-MenuItem.belongsToMany(Order, {through: 'OrderMenuItem'})
-Order.belongsToMany(MenuItem, {through: 'OrderMenuItem'})
+MenuItem.belongsToMany(Order, {through: OrderMenuItem, foreignKey: 'menuItemId', constraints: false})
+Order.belongsToMany(MenuItem, {through: OrderMenuItem, foreignKey: 'orderId', constraints: false})
 Order.belongsTo(User)
 
 db.User = User
