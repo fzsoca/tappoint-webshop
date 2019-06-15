@@ -6,23 +6,9 @@ module.exports = (sequelize, type) =>
             email: 
             {
                 type: type.STRING,
-                allowNull: false
-            },
-            name:
-            {
-                type: type.STRING,
-                allowNull: false
-            },
-            phone:
-            {
-                type: type.STRING,
-                allowNull: false
-            },
-            address:
-            {
-                type: type.STRING,
-                allowNull: false
-            },
+                allowNull: false,
+                unique: true
+            },         
             passwordHash:
             {
                 type: type.STRING,

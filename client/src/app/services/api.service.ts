@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 })
 export class ApiService {
 
-  baseUrl = 'localhost:3000'
+  baseUrl = 'http://localhost:3000'
 
   constructor(private http: HttpClient) {
 
@@ -31,6 +31,10 @@ export class ApiService {
 
   signUp(userData: any) {
     return this.http.post(this.baseUrl + '/users/signup', userData)
+  }
+
+  isLoggedIn(){
+    return !!localStorage.getItem('token')
   }
 
 }

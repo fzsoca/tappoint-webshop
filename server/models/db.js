@@ -31,7 +31,6 @@ var OrderMenuItem = sequelize.define('OrderMenuItem',
 //TODO what is unique
 MenuItem.belongsToMany(Order, {through: OrderMenuItem, foreignKey: 'menuItemId', constraints: false})
 Order.belongsToMany(MenuItem, {through: OrderMenuItem, foreignKey: 'orderId', constraints: false})
-Order.belongsTo(User)
 
 db.User = User
 db.MenuItem = MenuItem
