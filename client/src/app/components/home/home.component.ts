@@ -1,3 +1,4 @@
+import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  items: any;
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+   this.apiService.getMenuItems('Soup').subscribe(result => {
+        this.items = result;
+      }
+   );
   }
 
 }

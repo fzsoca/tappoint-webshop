@@ -18,7 +18,7 @@ export class ApiService {
 
   getMenuItems(category: string) {
     let params = new HttpParams().set('category', category)
-    return this.http.get(this.baseUrl + '/menuItems', { params: params })
+    return this.http.get(this.baseUrl + '/menuItems/' + category)
   }
 
   postOrder(order: any) {

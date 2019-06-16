@@ -1,3 +1,10 @@
-<p>
-  home works!
-</p>
+<div class="menu-item-container">
+
+  <div *ngFor="let item of items">
+    <mat-card>
+      <mat-card-title>{{item.name}}</mat-card-title>
+      <mat-card-content>{{item.description}}</mat-card-content>
+      <mat-card-actions align="right"><button mat-button color="primary">Add To Cart</button></mat-card-actions>
+    </mat-card>
+  </div>
+</div>

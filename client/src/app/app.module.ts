@@ -12,7 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule, MatSnackBarModule, MatButtonModule, MatSidenavModule, MatCardModule} from '@angular/material';
+import {MatInputModule, MatSnackBarModule, MatButtonModule, MatSidenavModule, MatCardModule, MatIconModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 
@@ -38,6 +38,7 @@ import { HomeComponent } from './components/home/home.component';
     MatButtonModule,
     MatSidenavModule,
     MatCardModule,
+    MatIconModule,
     AppRoutingModule
   ],
   providers: [CartService],
