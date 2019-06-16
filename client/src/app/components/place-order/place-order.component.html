@@ -1,3 +1,29 @@
-<p>
-  place-order works!
-</p>
+<div class="formcontainer">
+  <div class="formbody">
+      <form style="width:100%;" [formGroup]="myForm">
+          <div class="header">Place Order</div>
+          <div>
+              <mat-form-field style="width:100%;">
+                  <input type="text" formControlName="name" matInput placeholder="Name" id="name">
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field style="width:100%;">
+                  <input type="tel" formControlName="phone" matInput placeholder="Phone" id="phone">
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field style="width:100%;">
+                  <input type="text" formControlName="address" matInput placeholder="Address" id="address">
+              </mat-form-field>
+          </div>
+          <div style="margin-top:20px;">
+              <button mat-raised-button (click)="sendOrder()">Send</button>
+          </div>
+          <div style="text-align: center;">
+              {{responseMessage}}
+          </div>
+      </form>
+  </div>
+</div>
+

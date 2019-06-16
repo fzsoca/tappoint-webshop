@@ -16,6 +16,7 @@ var User = UserModel(sequelize, Sequelize)
 var MenuItem = MenuItemModel(sequelize, Sequelize)
 var Order = OrderModel(sequelize, Sequelize)
 
+
 var OrderMenuItem = sequelize.define('OrderMenuItem', 
 {
     menuItemId:
@@ -25,7 +26,8 @@ var OrderMenuItem = sequelize.define('OrderMenuItem',
     orderId: 
     {
         type: Sequelize.INTEGER
-    }
+    },
+    quantity: Sequelize.INTEGER
 })
 
 //TODO what is unique

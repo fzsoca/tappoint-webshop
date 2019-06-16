@@ -5,34 +5,40 @@ var db = require('../models/db');
 
 router.post('/', function(req, res, next) {
   //Check for upper limit
-  const sumCalculator = (accumulator, currElement) => accumulator + currElement.price;
-
-  let sum = req.body.menuItems.reduce( sumCalculator, 0);
-  if(sum > 20000)
-  {
-    return res.status(401);
-  }
+  
 
   let menuItems = [];
-  req.body.menuItems.forEach(element => {
-    db.MenuItem.findAll({
+
+  let requests = req.body.menuItemIds.map((item) => {
+    return db.MenuItem.findAll({
       where: {
-        id : element
+        id : item
       }
     })
-    .then(elem => {
-      menuItems.push(elem);
-    })
-  });
+})
+const sumCalculator = (accumulator, currElement) => accumulator + currElement[0].dataValues.price
+let sum;
+//As unreadable as it seems, apparently, this is how Sequelize returns values for legacy tables
+Promise.all(requests).then((values) => {
+  if(values.reduce(sumCalculator, 0) > 20000){
+    return res.status(401).send({error: 'Over 200'});
+  } else {
+    menuItems = values;
+  }
+  
+})
 
   db.Order.create({
-    email : req.body.email,
     name: req.body.name,
     phone: req.body.phone,
     address: req.body.address,
   }).then(order => {
-    order.setMenuItems(menuItems)
-      .then((order) => console.log(order));
+    menuItems.forEach(elem => {
+      order.addMenuItems(elem, {through: {quantity: 1} })
+      .then((order) => {})
+      .catch(err => console.log(err));
+    })
+   
   })
 
 

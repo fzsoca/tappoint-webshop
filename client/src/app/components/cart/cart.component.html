@@ -1,7 +1,9 @@
-<div >
-  <mat-card>
-    <mat-card-title>Example title</mat-card-title>
-    <mat-card-content>Lorem ipsum dolor sit amet</mat-card-content>
+<p>{{cartService.getSum()}}</p>
+<button mat-button (click)="openModal()">Place order</button>
+
+  <div *ngFor="let item of cartService.getItems()" >
+    <mat-card>
+    <mat-card-title>{{item.name}}</mat-card-title>
     <mat-card-actions align="right"><button mat-button color="warn">REMOVE</button></mat-card-actions>
   </mat-card>
 </div>

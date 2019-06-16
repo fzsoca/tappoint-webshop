@@ -3,11 +3,7 @@ module.exports = (sequelize, type) =>
     return sequelize.define
     ('Order',
         {
-            email: 
-            {
-                type: type.STRING,
-                allowNull: false
-            },
+           
             name:
             {
                 type: type.STRING,

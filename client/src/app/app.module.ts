@@ -1,3 +1,4 @@
+import { ApiService } from './services/api.service';
 import { CartService } from './services/cart.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatInputModule, MatSnackBarModule, MatButtonModule, MatSidenavModule, MatCardModule, MatIconModule} from '@angular/material';
+import {
+  MatInputModule,
+  MatSnackBarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatCardModule,
+  MatIconModule,
+  MatDialogModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 
@@ -38,10 +46,12 @@ import { HomeComponent } from './components/home/home.component';
     MatButtonModule,
     MatSidenavModule,
     MatCardModule,
+    MatDialogModule,
     MatIconModule,
     AppRoutingModule
   ],
-  providers: [CartService],
+  entryComponents: [AppComponent, PlaceOrderComponent],
+  providers: [CartService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,7 @@
 import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { PlaceOrderComponent } from '../place-order/place-order.component';
 
 @Component({
   selector: 'app-cart',
@@ -8,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor(public cartService: CartService) { }
+
+  constructor(public cartService: CartService, public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  sendOrder() {
+    let order = {};
+
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open(PlaceOrderComponent, {
+      width: '300px',
+      data: ''
+    });
   }
 
 }

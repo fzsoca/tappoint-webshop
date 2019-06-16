@@ -7,10 +7,22 @@ export class CartService {
 
   items: any[]
 
-  constructor() { }
+  constructor() {
+    if(localStorage.getItem('cart')){
+      this.items = JSON.parse(localStorage.getItem('cart'))
+    } else {
+      this.items = new Array();
+    }
+  }
+
+  getSum() {
+    const sumCalculator = (accumulator, currElement) => accumulator + currElement.price;
+    return this.getItems().reduce( sumCalculator, 0);
+  }
 
   addItem(item: any) {
     this.items.push(item);
+    localStorage.setItem('cart', JSON.stringify(this.items))
   }
 
   removeItem(id: number) {
@@ -19,7 +31,7 @@ export class CartService {
   }
 
   getItems() {
-    return this.items;
+    return JSON.parse(localStorage.getItem('cart'))
   }
 
 
