@@ -1,0 +1,13 @@
+  <mat-toolbar>
+
+
+      <a mat-button (click)="goToHome()">Home</a>
+
+      <span class="fill-remaining-space"></span>
+
+      <div *ngIf="!apiService.isLoggedIn()">
+
+        <a mat-button (click)="goToLogin()">Login</a>  <a mat-button (click)="goToRegister()">Register</a>
+      </div>
+
+  </mat-toolbar>

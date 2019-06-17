@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
       this.apiService.login(this.loginForm.value)
         .subscribe(
           data => {
-            console.log(data);
             localStorage.setItem('token', data.toString());
             this.router.navigate(['/']);
           },
-          error => { console.log(error) }
+          //TODO make this prettier
+          error => { alert(error.error.error) }
         );
     }
   }

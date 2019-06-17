@@ -13,16 +13,16 @@ router.post('/login', function(req, res, next) {
   .then(user => 
     {
 
-      if( bcrypt.compareSync(req.body.password, user.passwordHash) ) {
+      if(user && bcrypt.compareSync(req.body.password, user.passwordHash) ) {
         //TODO get secret from config
         let token = jwt.sign({username:user.email}, 'secret', {expiresIn : '3h'});
         return res.status(200).json(token);
 
       } else {
-       return res.status(401);
+       return res.status(401).send({error: "Wrong credentials"});
       } 
   })
-  .catch(err => { return res.status(500) })
+  .catch(err => {console.log(err); return res.status(500).send({error: err}) })
   
     
 })

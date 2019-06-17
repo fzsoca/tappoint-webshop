@@ -20,9 +20,12 @@ import {
   MatSidenavModule,
   MatCardModule,
   MatIconModule,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatMenuModule,
+  MatToolbarModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { HomeComponent } from './components/home/home.component';
     SignupComponent,
     CartItemComponent,
     PlaceOrderComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,8 @@ import { HomeComponent } from './components/home/home.component';
     MatCardModule,
     MatDialogModule,
     MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
     AppRoutingModule
   ],
   entryComponents: [AppComponent, PlaceOrderComponent],

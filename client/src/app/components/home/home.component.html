@@ -1,10 +1,18 @@
+<mat-toolbar>
+    <button mat-button *ngFor="let category of categories">{{category}}</button>
+</mat-toolbar>
+
 <div class="menu-item-container">
 
   <div *ngFor="let item of items">
     <mat-card>
       <mat-card-title>{{item.name}}</mat-card-title>
-      <mat-card-content>{{item.description}}</mat-card-content>
-      <mat-card-actions align="right"><button mat-button color="primary" (click)="addToCart(item)">Add To Cart</button></mat-card-actions>
+      <mat-card-content>
+        {{item.description}}
+        <p *ngIf="item.spicy">Csípős</p>
+        <p *ngIf="item.vegetarian">Vegetáriánus</p>
+      </mat-card-content>
+      <mat-card-actions align="right"><span>{{item.price}} HUF </span><button mat-button color="primary" (click)="addToCart(item)">Add To Cart</button></mat-card-actions>
     </mat-card>
   </div>
 </div>

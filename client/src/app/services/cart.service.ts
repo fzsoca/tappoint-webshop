@@ -28,12 +28,16 @@ export class CartService {
   removeItem(id: number) {
     let elementToRemove = this.items.find(elem => elem.id == id);
     this.items.splice(this.items.indexOf(elementToRemove), 1);
-    console.log(this.items)
+    localStorage.setItem('cart', JSON.stringify(this.items))
+  }
+
+  clearCart(){
+    this.items = []
     localStorage.setItem('cart', JSON.stringify(this.items))
   }
 
   getItems() : any[] {
-    return JSON.parse(localStorage.getItem('cart'))
+    return JSON.parse(localStorage.getItem('cart')) || []
   }
 
   getItemsWithCount() {

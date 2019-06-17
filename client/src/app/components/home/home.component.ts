@@ -11,11 +11,16 @@ export class HomeComponent implements OnInit {
 
   items: any;
   category: String;
+  categories: string[];
+
 
   constructor(private apiService: ApiService,
               private cartService: CartService) { }
 
   ngOnInit() {
+    this.apiService.getCategories().subscribe(data => this.categories = <string[]>data);
+
+
    this.apiService.getMenuItems('Soup').subscribe(result => {
         this.items = result;
       }

@@ -32,8 +32,5 @@ export class CartComponent implements OnInit {
     return obj.id;
   }
 
-  log() {
-    console.log('works')
-  }
 
 }
