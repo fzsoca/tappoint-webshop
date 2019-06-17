@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
 
     if (this.loginForm.valid) {
       this.apiService.login(this.loginForm.value)
@@ -38,12 +37,10 @@ export class LoginComponent implements OnInit {
           data => {
             localStorage.setItem('token', data.toString());
             this.router.navigate(['../home'], { relativeTo: this.activatedRoute });
-          },
-          //TODO make this prettier
-          error => { alert(error.error.error) }
+          }
         );
     }
   }
 
-  
+
 }

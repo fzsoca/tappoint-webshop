@@ -4,10 +4,12 @@ const UserModel = require('./user')
 const OrderModel = require('./order')
 const MenuItemModel = require('./menuItem')
 
+const config = require('../config')
+
 var db = {}
 
-//TODO get parameters from config file or .env variable
-const sequelize = new Sequelize('tappoint', 'tappoint-db-user', 'm3m3nt0_m0r1', {
+//In production, we can get these from env variable
+const sequelize = new Sequelize(config["db-name"], config["db-user"], config["db-password"], {
     host: 'localhost',
     dialect: 'mysql'
 })
@@ -30,7 +32,6 @@ var OrderMenuItem = sequelize.define('OrderMenuItem',
     quantity: Sequelize.INTEGER
 })
 
-//TODO what is unique
 MenuItem.belongsToMany(Order, {through: OrderMenuItem, foreignKey: 'menuItemId', constraints: false})
 Order.belongsToMany(MenuItem, {through: OrderMenuItem, foreignKey: 'orderId', constraints: false})
 

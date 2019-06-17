@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   myForm: FormGroup;
-  responseMessage: String = '';
   constructor(private ApiService: ApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
@@ -21,7 +20,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.myForm = new FormGroup({
       email: new FormControl(null, Validators.email),
-      password: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$')),
       cnfpass: new FormControl(null, this.passValidator)
     });
 
@@ -31,8 +30,7 @@ export class SignupComponent implements OnInit {
       );
   }
 
-  //TODO rename this
-  isValid(controlName) {
+  isInvalid(controlName) {
     return this.myForm.get(controlName).invalid && this.myForm.get(controlName).touched;
   }
 
@@ -55,13 +53,11 @@ export class SignupComponent implements OnInit {
   }
 
   register() {
-    console.log(this.myForm.value);
 
     if (this.myForm.valid) {
       this.ApiService.signUp(this.myForm.value)
         .subscribe(
-          data => this.movetologin() ,
-          error => this.responseMessage = 'Some error'
+          data => this.movetologin()
         );
     }
   }

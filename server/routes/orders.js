@@ -45,7 +45,7 @@ Promise.all(requests).then((values) => {
     menuItems.forEach(elem => {
       order.addMenuItems(elem, {through: {quantity: req.body.menuItemIds.find(x => x.id == elem[0].dataValues.id).count} })
       .then((order) => {})
-      .catch(err => console.log(err));
+      .catch(err => res.status(500).json({error: "Unexpected error"}));
     })
    
   })

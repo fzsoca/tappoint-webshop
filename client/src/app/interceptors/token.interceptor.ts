@@ -8,9 +8,9 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ApiService } from '../services/api.service';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { AlertModalComponent } from '../components/alert-modal/alert-modal.component';
 
 @Injectable()
@@ -25,18 +25,25 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request).pipe(tap(
-      (err: any) => {
-        if (err instanceof HttpErrorResponse) {
-          this.matDialog.open(AlertModalComponent, {
-            width: '400px',
-            height: '200px',
-            data: err.error.error
-          })
+              return next.handle(request).pipe
+            (
+                catchError
+              (
+                (err: HttpErrorResponse) =>
+                {
+                    this.matDialog.open
+                  (AlertModalComponent,
+                    {
+                      width: '400px',
+                      height: '200px',
+                      data: err.error.error
+                    }
+                  );
+                  return throwError(err);
+                }
+              )
+            );
 
-        }
-      }
-    ));
 
   }
 }

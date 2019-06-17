@@ -2,11 +2,13 @@ var express = require('express')
 var router = express.Router()
 var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
+
+const config = require('../config')
 var db = require('../models/db')
 
 router.post('/login', function(req, res, next) {
   if(!req.body.email || !req.body.password){
-    return res.status(401).send({error: "Wrong credentials"});
+    return res.status(400).send({error: "Bad request data"});
   }
   db.User.findOne({
     where: {
@@ -17,24 +19,22 @@ router.post('/login', function(req, res, next) {
     {
 
       if(user && bcrypt.compareSync(req.body.password, user.passwordHash) ) {
-        //TODO get secret from config
-        let token = jwt.sign({username:user.email}, 'secret', {expiresIn : '3h'});
+        let token = jwt.sign({username:user.email}, config["jwt-secret"], {expiresIn : '3h'});
         return res.status(200).json(token);
 
       } else {
        return res.status(401).send({error: "Wrong credentials"});
       } 
   })
-  .catch(err => {console.log(err); return res.status(500).send({error: "Unexpected error"}) })
+  .catch(err =>  res.status(500).send({error: "Unexpected error"}) )
   
     
 })
 
-//Let this handle profile change as well?
 router.post('/signup', function(req, res, next) {
 
     //should contain at least one upper and lowercase character, and must be at least 8 characters long
-    const passRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.{8,})")
+    const passRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z]).{8,}$")
 
     //this is a best effort email syntax validator, see
     //https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression

@@ -9,4 +9,10 @@ describe('CartService', () => {
     const service: CartService = TestBed.get(CartService);
     expect(service).toBeTruthy();
   });
+
+  it('should add item to cart', () => {
+    const service: CartService = TestBed.get(CartService);
+    service.addItem({testProp: 'true'})
+    expect(service.getItems()).toBe([{testProp: 'true'}])
+  })
 });

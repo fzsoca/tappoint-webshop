@@ -5,7 +5,7 @@
           <div>
               <mat-form-field style="width:100%;">
                   <input type="text" formControlName="email" matInput placeholder="Email" id="email">
-                  <mat-error *ngIf="isValid('email')">Email is invalid!</mat-error>
+                  <mat-error *ngIf="isInvalid('email')">Email is invalid!</mat-error>
               </mat-form-field>
           </div>
 
@@ -13,7 +13,7 @@
               <mat-form-field style="width:100%;">
                   <input type="password" formControlName="password" matInput placeholder="Password" id="pass">
                   <mat-hint >At least 8 characters, upper, and lowercase letters</mat-hint>
-                  <mat-error *ngIf="isValid('password')">Password is invalid!</mat-error>
+                  <mat-error *ngIf="isInvalid('password')">Password is invalid!</mat-error>
               </mat-form-field>
 
           </div>
@@ -21,16 +21,14 @@
               <mat-form-field style="width:100%;">
                   <input type="password" formControlName="cnfpass" matInput placeholder="Re-enter Password" id="cnfpass">
               </mat-form-field>
-              <span *ngIf="isValid('cnfpass')">Password and confirm password should match</span>
+              <mat-error *ngIf="isInvalid('cnfpass')">Password and confirm password should match</mat-error>
           </div>
           <div style="margin-top:20px;">
               <button mat-raised-button (click)="register()">Register</button>
           </div>
 
 
-          <div style="text-align: center;">
-              {{responseMessage}}
-          </div>
+
       </form>
   </div>
 </div>

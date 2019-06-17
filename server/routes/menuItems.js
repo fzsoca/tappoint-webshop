@@ -12,7 +12,7 @@ router.get('/categories', function(req, res, next) {
        data => res.json(data.map(x => x.dataValues.category))
     )
     .catch(
-        err => res.json({}).status(404)
+        err => res.status(500).json({error: "Unexpected error"})
     )
 })
 
