@@ -31,8 +31,7 @@ export class PlaceOrderComponent implements OnInit {
     order.name = this.myForm.controls['name'].value;
 
     order.menuItemIds = this.cartService.getItemsWithCount().map(x => { return { "id": x.id, "count": x.count}});
-    console.log(order.menuItemIds)
-    this.apiService.postOrder(order).subscribe(data => console.log(data), err => console.log(err))
+    this.apiService.postOrder(order).subscribe(data =>this.cartService.clearCart(), err => alert(err.error.error))
 
   }
 

@@ -33,6 +33,10 @@ export class ApiService {
     return this.http.post(this.baseUrl + '/users/signup', userData)
   }
 
+  logout() {
+    localStorage.removeItem('token')
+  }
+
   isLoggedIn(){
     return !!localStorage.getItem('token')
   }

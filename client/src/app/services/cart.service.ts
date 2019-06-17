@@ -1,3 +1,5 @@
+import { AlertModalComponent } from './../components/alert-modal/alert-modal.component';
+import { MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,7 +9,7 @@ export class CartService {
 
   items: any[]
 
-  constructor() {
+  constructor(private matDialog: MatDialog) {
     if(localStorage.getItem('cart')){
       this.items = JSON.parse(localStorage.getItem('cart'))
     } else {
@@ -22,6 +24,15 @@ export class CartService {
 
   addItem(item: any) {
     this.items.push(item);
+    localStorage.setItem('cart', JSON.stringify(this.items))
+    if(this.getSum() > 20000) {
+      this.items.pop();
+      this.matDialog.open(AlertModalComponent, {
+        width: '400px',
+        height: '200px',
+        data: 'Exceeding cart limit'
+      })
+    }
     localStorage.setItem('cart', JSON.stringify(this.items))
   }
 

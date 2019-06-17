@@ -10,7 +10,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -27,6 +26,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +35,10 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MenuItemComponent,
     LoginComponent,
     SignupComponent,
-    CartItemComponent,
     PlaceOrderComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AlertModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +57,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatToolbarModule,
     AppRoutingModule
   ],
-  entryComponents: [AppComponent, PlaceOrderComponent],
+  entryComponents: [AppComponent, PlaceOrderComponent, AlertModalComponent],
   providers: [CartService, ApiService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

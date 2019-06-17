@@ -1,4 +1,4 @@
-<p>{{cartService.getSum()}}</p>
+<strong>Total: {{cartService.getSum()}}</strong>
 <button mat-button (click)="openModal()">Place order</button>
 
   <div *ngFor="let item of cartService.getItemsWithCount(); trackBy:trackByIndex" >

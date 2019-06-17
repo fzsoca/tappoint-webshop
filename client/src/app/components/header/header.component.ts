@@ -1,7 +1,8 @@
 import { ApiService } from './../../services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() inputSideNav: MatSidenav;
 
   constructor(public apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -25,6 +28,11 @@ export class HeaderComponent implements OnInit {
   }
 
   goToHome() {
+    this.router.navigate(['../home'], { relativeTo: this.activatedRoute });
+  }
+
+  logout() {
+    this.apiService.logout();
     this.router.navigate(['../home'], { relativeTo: this.activatedRoute });
   }
 

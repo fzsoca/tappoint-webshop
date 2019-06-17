@@ -16,11 +16,6 @@ export class CartComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendOrder() {
-    let order = {};
-
-  }
-
   openModal() {
     const dialogRef = this.dialog.open(PlaceOrderComponent, {
       width: '300px',

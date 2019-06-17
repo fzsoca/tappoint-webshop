@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             localStorage.setItem('token', data.toString());
-            this.router.navigate(['/']);
+            this.router.navigate(['../home'], { relativeTo: this.activatedRoute });
           },
           //TODO make this prettier
           error => { alert(error.error.error) }
@@ -45,7 +45,5 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  movetoregister() {
-    this.router.navigate(['../signup'], { relativeTo: this.activatedRoute });
-  }
+  
 }

@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   items: any;
-  category: String;
   categories: string[];
 
 
@@ -19,12 +18,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getCategories().subscribe(data => this.categories = <string[]>data);
+  }
 
-
-   this.apiService.getMenuItems('Soup').subscribe(result => {
-        this.items = result;
-      }
-   );
+  chooseCategory(category: string) {
+    this.apiService.getMenuItems(category).subscribe(result => {
+      this.items = result;
+    })
   }
 
   addToCart(item: any) {

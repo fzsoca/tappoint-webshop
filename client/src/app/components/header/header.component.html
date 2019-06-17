@@ -9,5 +9,9 @@
 
         <a mat-button (click)="goToLogin()">Login</a>  <a mat-button (click)="goToRegister()">Register</a>
       </div>
+      <div *ngIf="apiService.isLoggedIn()">
+          <a mat-button (click)="inputSideNav.toggle()">View/Hide Cart</a>
+          <a mat-button (click)="logout()">Logout</a>
+        </div>
 
   </mat-toolbar>
