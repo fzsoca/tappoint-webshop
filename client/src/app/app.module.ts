@@ -23,9 +23,10 @@ import {
   MatDialogModule,
   MatMenuModule,
   MatToolbarModule} from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,11 @@ import { HeaderComponent } from './components/header/header.component';
     AppRoutingModule
   ],
   entryComponents: [AppComponent, PlaceOrderComponent],
-  providers: [CartService, ApiService],
+  providers: [CartService, ApiService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

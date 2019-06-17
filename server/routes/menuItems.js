@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+
 var db = require('../models/db');
 
 router.get('/categories', function(req, res, next) {
@@ -26,7 +27,7 @@ router.get('/:category', function(req, res, next) {
         data => res.json(data)
     )
     .catch(
-        err => res.status(500)
+        err => res.status(500).send()
     )
 })
 
