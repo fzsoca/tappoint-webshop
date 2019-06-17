@@ -1,3 +1,4 @@
+import { CartService } from './cart.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpParams } from '@angular/common/http'
@@ -9,7 +10,7 @@ export class ApiService {
 
   baseUrl = 'http://localhost:3000'
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private cartService: CartService) {
 
   }
 
@@ -36,6 +37,7 @@ export class ApiService {
 
   logout() {
     localStorage.removeItem('token')
+    this.cartService.clearCart()
     this.router.navigate(['/login'])
   }
 
