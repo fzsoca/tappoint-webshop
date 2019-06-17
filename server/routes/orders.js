@@ -4,9 +4,13 @@ var db = require('../models/db');
 
 
 router.post('/', function(req, res, next) {
-  //Check for upper limit
-  
 
+
+  if(!req.body.name ||
+     !req.body.phone ||
+     !req.body.address) {
+     return res.status(400).send()
+    } 
   let menuItems = [];
 
   let requests = req.body.menuItemIds.map((item) => {
@@ -20,6 +24,9 @@ const sumCalculator = (accumulator, currElement) => accumulator + currElement[0]
 let sum;
 //As unreadable as it seems, apparently, this is how Sequelize returns values for legacy tables
 Promise.all(requests).then((values) => {
+  if(values.length == 0){
+    return res.status(400).send();
+  }
   if(values.reduce(sumCalculator, 0) > 20000){
     return res.status(401).send({error: 'Over 200'});
   } else {

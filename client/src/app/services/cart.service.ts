@@ -28,10 +28,30 @@ export class CartService {
   removeItem(id: number) {
     let elementToRemove = this.items.find(elem => elem.id == id);
     this.items.splice(this.items.indexOf(elementToRemove), 1);
+    console.log(this.items)
+    localStorage.setItem('cart', JSON.stringify(this.items))
   }
 
-  getItems() {
+  getItems() : any[] {
     return JSON.parse(localStorage.getItem('cart'))
+  }
+
+  getItemsWithCount() {
+    let raw: any[] = this.getItems()
+    let itemsWithCount = []
+    itemsWithCount = raw.reduce(function (acc : any[], curr) {
+      if (typeof acc[curr.id] == 'undefined') {
+        acc[curr.id] = curr;
+        acc[curr.id].count = 1;
+
+      } else {
+        acc[curr.id].count += 1;
+      }
+
+      return acc;
+    }, {})
+    let itemsArray = Object.keys(itemsWithCount).map(x => itemsWithCount[x])
+      return itemsArray;
   }
 
 

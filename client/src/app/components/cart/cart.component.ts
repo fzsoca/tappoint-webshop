@@ -28,4 +28,12 @@ export class CartComponent implements OnInit {
     });
   }
 
+  trackByIndex(i: number, obj: any) {
+    return obj.id;
+  }
+
+  log() {
+    console.log('works')
+  }
+
 }

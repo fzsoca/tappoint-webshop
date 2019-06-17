@@ -1,9 +1,11 @@
 <p>{{cartService.getSum()}}</p>
 <button mat-button (click)="openModal()">Place order</button>
 
-  <div *ngFor="let item of cartService.getItems()" >
+  <div *ngFor="let item of cartService.getItemsWithCount(); trackBy:trackByIndex" >
     <mat-card>
     <mat-card-title>{{item.name}}</mat-card-title>
-    <mat-card-actions align="right"><button mat-button color="warn">REMOVE</button></mat-card-actions>
+    <p>x{{item.count}}</p>
+
+    <mat-card-actions align="right" ><button (click)="cartService.removeItem(item.id)" mat-button >REMOVE</button></mat-card-actions>
   </mat-card>
 </div>
